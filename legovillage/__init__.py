@@ -26,7 +26,7 @@ Get total unread emails count.
     imap_username - username to authenticate
     imap_passwd_file - file that contains base64 encoded password
     
-    @returns the total number of unread emails
+@returns the total number of unread emails
 """
 def unread_email_count(config):
     imappasswd = b64decode(

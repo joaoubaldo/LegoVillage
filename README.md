@@ -19,6 +19,7 @@ Installation
 ------------
 > python setup.py install
 
+Upload the following sketch to an Arduino: https://github.com/thearn/Python-Arduino-Command-API
 
 Usage
 -----
