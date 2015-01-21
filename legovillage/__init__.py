@@ -58,15 +58,18 @@ code (ex. checking email) and putting results inside a dict object.
 #TODO: use a Queue instead of dict object. 
 def work(config, data):
     while 1:
-        count = unread_email_count(config)
-        logging.info("mail count: %d" % (count,))
-        LegoVillage.worker_data_lock.acquire()
-        running = data['running']
-        data['unread_email_count'] = count
-        LegoVillage.worker_data_lock.release()
-        if not running:
-            logging.info("Stopping work thread")
-            break
+        try:
+            count = unread_email_count(config)
+            logging.info("mail count: %d" % (count,))
+            LegoVillage.worker_data_lock.acquire()
+            running = data['running']
+            data['unread_email_count'] = count
+            LegoVillage.worker_data_lock.release()
+            if not running:
+                logging.info("Stopping work thread")
+                break
+        except Exception, e:
+            log.exception(e)
         sleep(float(config.get('sleep_seconds')))
 
 
